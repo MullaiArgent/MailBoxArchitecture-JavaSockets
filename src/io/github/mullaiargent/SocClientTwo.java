@@ -15,14 +15,16 @@ public class SocClientTwo {
 
         String str = " ClientTwo's Mail Message";
 
-        OutputStreamWriter os = new OutputStreamWriter(
-                socket.getOutputStream());
+        OutputStreamWriter os = new OutputStreamWriter(socket.getOutputStream());
         PrintWriter out = new PrintWriter(os);
+        out.println(str);
+        os.flush();
+        //Thread.sleep(400);
 
-        out.write(str);
-        out.flush();
-        Thread.sleep(400);
+        BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
+        String serverData = br.readLine();
+        System.out.println(serverData);
 
         socket.close();
     }

@@ -3,10 +3,6 @@ package io.github.mullaiargent;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 
 public class SocServer {
     public static void main(String[] args) throws Exception{
@@ -23,8 +19,7 @@ public class SocServer {
         noOfClients++;
         System.out.println("1. Client " + noOfClients + "Connected");
 
-        BufferedReader br = new BufferedReader(
-                new InputStreamReader(socket.getInputStream()));
+        BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
         String clientData = br.readLine();
         System.out.println("2. printing " + noOfClients + "'s Data" + clientData);
@@ -46,7 +41,11 @@ public class SocServer {
 
 
         }
-
+        OutputStreamWriter os = new OutputStreamWriter(socket.getOutputStream());
+        PrintWriter out = new PrintWriter(os);
+        out.println("response : your Data has been added to the File");
+        os.flush();
+        System.out.println("responded to the Client");
         System.out.println("3. Data saved in File System");
         fw.close();
 
