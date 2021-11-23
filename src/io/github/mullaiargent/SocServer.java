@@ -30,6 +30,7 @@ public class SocServer {
                 System.out.println("File created");
 
                 fw.write("id," + socket.getPort() + ","+ clientData + "\n");
+
             } else {
                 String content =  "id " + socket.getPort() + "\n" + clientData;
                 System.out.println("Already Created");
