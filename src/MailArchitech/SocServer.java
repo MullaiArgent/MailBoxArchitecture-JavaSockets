@@ -1,4 +1,4 @@
-package io.github.mullaiargent;
+package MailArchitech;
 
 import java.io.*;
 import java.net.ServerSocket;
