@@ -10,7 +10,7 @@ public class SocClient {
         int port = 8888;
         Socket socket = new Socket(ip, port);
         
-        String str = "MailMessage";
+        String str = "MailMessage ";
 
         OutputStreamWriter os = new OutputStreamWriter(socket.getOutputStream());
         PrintWriter out = new PrintWriter(os);
