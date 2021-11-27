@@ -1,4 +1,4 @@
-package c2c;
+package c2cBroadCast;
 
 import java.io.IOException;
 import java.net.ServerSocket;

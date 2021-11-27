@@ -1,4 +1,4 @@
-package c2c;
+package c2cBroadCast;
 
 import java.io.*;
 import java.net.Socket;
@@ -9,7 +9,7 @@ public class Client {
     private BufferedWriter bufferedWriter;
     private BufferedReader bufferedReader;
     private String userName;
-    public Client (Socket socket, String userName) throws IOException {
+    public Client (Socket socket, String userName) {
         try {
             this.socket = socket;
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -42,6 +42,7 @@ public class Client {
             Scanner scanner = new Scanner(System.in);
             while(socket.isConnected()){
                 String messageToSend = scanner.nextLine();
+                System.out.println("You :" + messageToSend);
                 bufferedWriter.write(messageToSend);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
@@ -52,20 +53,17 @@ public class Client {
     }
 
     public void listenForMessage(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String msgFromGroupChat;
-                while(socket.isConnected()){
-                    try {
-                        msgFromGroupChat = bufferedReader.readLine();
-                        System.out.println(msgFromGroupChat);
+        new Thread(() -> {
+            String msgFromGroupChat;
+            while(socket.isConnected()){
+                try {
+                    msgFromGroupChat = bufferedReader.readLine();
+                    System.out.println(msgFromGroupChat);
 
-                    } catch (IOException e) {
-                        closeEverything(socket, bufferedWriter, bufferedReader);
-                    }
-
+                } catch (IOException e) {
+                    closeEverything(socket, bufferedWriter, bufferedReader);
                 }
+
             }
         }).start();
     }
